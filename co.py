@@ -1,0 +1,15 @@
+A=["add","sub",'mul','xor','or','and']
+B=['mov','rs','ls']#all type b commands have $ in them
+C=['movr','div','not','cmp']
+D=['ld','st']
+E=['jmp','jlt','jgt']
+F=['hlt']
+oc={'add':0o00000,'sub':0o00001,'mov':0o00010,'movr':0o00011,'ld':0o00100,'st':0o00101,'mul':0o00110,'div':0o00111,'rs':0o01000,'ls':0o01001,'xor':0o01010,'or':0o01011,'and':0o01100,'not':0o01101,'cmp':0o01110,'jmp':0o01111,'jlt':0o1000,'jgt':0o10001,'hlt':0o10011}
+r0=0o000
+r1=0o001
+r2=0o010
+r3=0o011
+r4=0o100
+r5=0o101
+r6=0o110
+FLAGS=0o111
