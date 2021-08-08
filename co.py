@@ -4,12 +4,42 @@ C=['movr','div','not','cmp']
 D=['ld','st']
 E=['jmp','jlt','jgt']
 F=['hlt']
-oc={'add':0o00000,'sub':0o00001,'mov':0o00010,'movr':0o00011,'ld':0o00100,'st':0o00101,'mul':0o00110,'div':0o00111,'rs':0o01000,'ls':0o01001,'xor':0o01010,'or':0o01011,'and':0o01100,'not':0o01101,'cmp':0o01110,'jmp':0o01111,'jlt':0o1000,'jgt':0o10001,'hlt':0o10011}
-r0=0o000
-r1=0o001
-r2=0o010
-r3=0o011
-r4=0o100
-r5=0o101
-r6=0o110
-FLAGS=0o111
+oc={'add':'00000','sub':'00001','mov':'00010','movr':'00011','ld':'00100','st':'00101','mul':'00110','div':'00111','rs':'01000','ls':'01001','xor':'01010','or':'01011','and':'01100','not':'01101','cmp':'01110','jmp':'01111','jlt':'10000','jgt':'10001','hlt':"10011"}
+addrs={'R0':'000','R1':'001','R2':'010','R3':'011','R4':'100','R5':'101','R6':'110','FLAGS':'111'}
+type=''
+data=[]
+file = open('test.txt', 'r')
+for i in file:
+    k=i.split()
+    if len(k)==0:
+        continue                        #ignores empty lines
+    data.append(k)
+
+#print(data)
+for i in (data[0]):
+    if '$' in i:
+        type='b'
+    else:
+        continue
+else:
+    print(type)
+    type=''
+print(data[0])
+print(type)
+k=data[0]
+print(k)
+out=''
+for i in range(len(k)):
+    print(k[i])
+    if i == 0:                          #type A stuf
+        out=out+oc.get(k[i])
+        out=out+'00'
+    elif(k[i][0]=="R"):
+        out=out+addrs.get(k[i])
+    else:
+        pass
+
+else:
+    print(out)
+    #print(len(out))
+
