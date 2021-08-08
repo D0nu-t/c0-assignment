@@ -1,12 +1,12 @@
-
-sub R0 R1 R2
-sub R0 R1 R2
-sub R0 R1 R2
-sub R0 R1 R2
-sub R0 R1 R2
-sub R0 R1 R2
-sub R0 R1 R2
-sub R0 R1 R2
-sub R0 R1 R2
-sub R0 R1 R2
-hlt
+add R0 R1 R2
+add R0 R1 R2
+add R0 R1 R2
+add R0 R1 R2
+add R0 R1 R2
+add R0 R1 R2
+add R0 R1 R2
+add R0 R1 R2
+add R0 R1 R2
+add R0 R1 R2
+add R0 R1 R2
+add R0 R1 R2
