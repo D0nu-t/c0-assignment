@@ -16,19 +16,41 @@ for i in file:
     data.append(k)
 
 #print(data)
-for i in (data[0]):
-    if '$' in i:
-        type='b'
+for i in (data):
+    for j in i:
+        #print(i[0])
+        if '$' in i:
+            type='b'
+        if(i[0]  not in oc.keys()):
+            print("error: invalid instruction")
+            break
+            
+    if "hlt" not in data[-1] or "hlt" not in data:
+        print('error: hlt not found')
+        break
     else:
-        continue
+        pass
+
 else:
     print(type)
     type=''
-print(data[0])
+#print(data[0])
 print(type)
-k=data[0]
-print(k)
+k=data[-1]
+
+print(oc.keys())
+print("mul" in oc.keys())
 out=''
+if "hlt" not in data[-1]:
+    print('error: hlt not found')
+""" for i in  range(0,len(k)+1):
+    if i ==0:
+
+        if i not in A or i not in B or i not in C or i not in D or i not in E or i not in F:
+            print('error: invalid instruction ')
+    else:
+        pass """
+
 for i in range(len(k)):
     print(k[i])
     if i == 0:                          #type A stuf
