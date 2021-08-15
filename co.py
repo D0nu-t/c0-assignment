@@ -104,7 +104,7 @@ for i in (data):
         #break
     if a in A:
          print_a(i[0], i[1], i[2], i[3],lno)
-         print('*')
+         
     elif  a in B:
         print_b(a,i[1],int(i[2][1:]),lno)
     elif a in C:
@@ -120,7 +120,10 @@ for i in (data):
     lno+=1
     #print(lno)
 else:
-    print(final_output)
+    for i in final_output:
+        sys.stdout.write(i)
+        sys.stdout.write('\n')
+    
     
     
         
