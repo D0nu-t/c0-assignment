@@ -61,8 +61,8 @@ def print_f(operation,line_no):
     res =oc[operation]+"00000000000"    
     final_output.append(res)
 
-#file = sys.stdin.read()
-file =open('test.txt','r')
+file = sys.stdin.read()
+#file =open('test.txt','r')
 for i in file:
     k=i.split()
     if len(k)==0:
