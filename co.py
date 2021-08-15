@@ -33,7 +33,7 @@ def print_a(operation, para_a, para_b, para_c, line_no):
     final_output.append(res)
 def print_b(operation, para_a, imm, line_no):
     res = oc[operation]
-    t = regOf(para_a, line_no)
+    t = regOf(para_a)
     res += t
     res += convertBinary(imm)
     final_output.append(res)
