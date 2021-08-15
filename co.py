@@ -8,8 +8,9 @@ E=['jmp','jlt','jgt']
 F=['hlt']
 oc={'add':'00000','sub':'00001','mov':'00010','movr':'00011','ld':'00100','st':'00101','mul':'00110','div':'00111','rs':'01000','ls':'01001','xor':'01010','or':'01011','and':'01100','not':'01101','cmp':'01110','jmp':'01111','jlt':'10000','jgt':'10001','hlt':"10011"}
 addrs={'R0':'000','R1':'001','R2':'010','R3':'011','R4':'100','R5':'101','R6':'110','FLAGS':'111'}
-type=''
 data=[]
+lst_var = []
+lst_labels = []
 final_output=[]
 def regOf(a):
     if(a in addrs and a.lower() != "flags"):
@@ -60,7 +61,8 @@ def print_f(operation,line_no):
     res =oc[operation]+"00000000000"    
     final_output.append(res)
 
-file = sys.stdin.read()
+#file = sys.stdin.read()
+file =open('test.txt','r')
 for i in file:
     k=i.split()
     if len(k)==0:
@@ -74,8 +76,24 @@ for i in (data):
     if(a not in oc.keys()):
         print("error: invalid instruction")
         break
-
-            
+    
+    for i in range(0,len(data)):
+        k = data[i]
+        if(k[0] == "var"):
+            lst_var.append(k[1])
+        elif(k[0] != "hlt"):
+            for a in k[1:]:
+                if a not in lst_var and a not in addrs:
+                    print("error: use of undefined variable ")
+    for i in range(0,len(data)):
+        k = data[i]
+        if(k[0][-1] == ":"):
+            lst_labels.append(k[0:-1])
+    for i in range(0,len(data)):
+        k = data[i]
+        if(len(k) == 1):
+            if k[0] not in lst_labels:
+                print("error: use of undefined label")       
     if "hlt" not in data[-1] or "hlt" not in data:
         print('error: hlt not found')
         break
@@ -98,7 +116,7 @@ for i in (data):
     lno+=1
 else:
     sys.stdout.write(final_output)
-    
+
     
     
         
