@@ -11,10 +11,10 @@ addrs={'R0':'000','R1':'001','R2':'010','R3':'011','R4':'100','R5':'101','R6':'1
 data=[]
 lst_var = []
 lst_labels = []
-final_output=[]
+
 def regOf(a):
-    if(a in addrs and a.lower() != "flags"):
-        return(str(addrs[a.lower()]))
+    if(a in addrs and a.upper() != "flags"):
+        return(str(addrs[a.upper()]))
     else:
         return 0
     
@@ -27,7 +27,7 @@ def convertBinary(a):
     return(bnr)
 def print_a(operation, para_a, para_b, para_c, line_no):
     res = oc[operation] + "00" #add r3 r2 r1
-    for i in para_a, para_b, para_c:
+    for i in [para_a, para_b, para_c]:
         t = regOf(i)
         res += t
     final_output.append(res)
@@ -69,10 +69,14 @@ for i in file:
         continue                        #ignores empty lines
     data.append(k)
 
-#print(data)
+#print(oc["add"])
+
 lno=0
+final_output=[]
 for i in (data):
     a=i[0]
+    print(i[0] in A)
+    #print(a)
     if(a not in oc.keys()):
         print("error: invalid instruction")
         break
@@ -92,16 +96,16 @@ for i in (data):
     for i in range(0,len(data)):
         k = data[i]
         if(len(k) == 1):
-            if k[0] not in lst_labels:
-                print("error: use of undefined label")       
-    if "hlt" not in data[-1] or "hlt" not in data:
+            if k[0] != "hlt" and k[0] not in lst_labels:
+                print("error: use of undefined label")  
+    r=len(data)     
+    if data[r-1]=="hlt" :
         print('error: hlt not found')
-        break
-    else:
-        pass
+        #break
     if a in A:
-         print_a(a, i[1], i[2], i[3],lno)
-    elif "$" in i or a in B:
+         print_a(i[0], i[1], i[2], i[3],lno)
+         print('*')
+    elif  a in B:
         print_b(a,i[1],int(i[2][1:]),lno)
     elif a in C:
         print_c(a,i[1],i[2],lno)
@@ -111,12 +115,13 @@ for i in (data):
         print_e(a,i[1],lno)
     elif a in F:
         print_f(a,lno)
-    else:
-        print("error:invalid instruction")
+    #else:
+     #   print("error:invalid instruction")
     lno+=1
+    #print(lno)
 else:
-    sys.stdout.write(final_output)
-
+    print('test')
+print(final_output)
     
     
         
