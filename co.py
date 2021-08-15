@@ -75,7 +75,7 @@ lno=0
 final_output=[]
 for i in (data):
     a=i[0]
-    print(i[0] in A)
+    #print(i[0] in A)
     #print(a)
     if(a not in oc.keys()):
         print("error: invalid instruction")
@@ -120,8 +120,7 @@ for i in (data):
     lno+=1
     #print(lno)
 else:
-    print('test')
-print(final_output)
+    print(final_output)
     
     
         
