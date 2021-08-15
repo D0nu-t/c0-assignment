@@ -73,6 +73,23 @@ for i in file:
 
 lno=0
 final_output=[]
+for i in range(0,len(data)):
+    k = data[i]
+    if(k[0] == "var"):
+        lst_var.append(k[1])
+    elif(k[0] != "hlt"):
+        for a in k[1:]:
+            if a not in lst_var and a not in addrs:
+                print("error: use of undefined variable ")
+for i in range(0,len(data)):
+    k = data[i]
+    if(k[0][-1] == ":"):
+        lst_labels.append(k[0:-1])
+for i in range(0,len(data)):
+    k = data[i]
+    if(len(k) == 1):
+        if k[0] != "hlt" and k[0] not in lst_labels:
+            print("error: use of undefined label")  
 for i in (data):
     a=i[0]
     #print(i[0] in A)
@@ -80,25 +97,8 @@ for i in (data):
     if(a not in oc.keys()):
         print("error: invalid instruction")
         break
-    else:
     
-        for i in range(0,len(data)):
-            k = data[i]
-            if(k[0] == "var"):
-                lst_var.append(k[1])
-            elif(k[0] != "hlt"):
-                for a in k[1:]:
-                    if a not in lst_var and a not in addrs:
-                        print("error: use of undefined variable ")
-            for i in range(0,len(data)):
-                k = data[i]
-                if(k[0][-1] == ":"):
-                    lst_labels.append(k[0:-1])
-                for i in range(0,len(data)):
-                    k = data[i]
-                    if(len(k) == 1):
-                        if k[0] != "hlt" and k[0] not in lst_labels:
-                            print("error: use of undefined label")  
+
     r=len(data)     
     if data[r-1]=="hlt" :
         print('error: hlt not found')
