@@ -34,7 +34,8 @@ def executionEngine(code):
     val=0
     address=0
     imm=0
-    op=opcode_dic[(code[0:5])]
+    #code=str(code)
+    op=opcode_dic[code[0:5]]
     if op == "add":
         reg_1, reg_2, reg_3=code[7:10],code[10:13],code[13:16] 
         reg_dic[reg_1]=reg_dic[reg_2]+reg_dic[reg_3]
@@ -91,12 +92,12 @@ def executionEngine(code):
     elif op == "ld":
         
         a,b=code[5:8],code[8:16]
-        x = decimalToBinary(b)
+        x = decimalToBinary(int(b))
         a = memory[x]
     elif op == "st":
         
         a,b=code[5:8],code[8:16]
-        x = decimalToBinary(b)
+        x = decimalToBinary(int(b))
         memory[x] = a
     
     elif op == "mul":
@@ -144,7 +145,7 @@ def executionEngine(code):
         if reg_dic['111']=="0000000000000001":
             pc = int(address, base=2)
     if op == "hlt":
-        halted=True
+        halted=1
 loadData()
 defineMemory()
 while(not halted):
@@ -165,9 +166,9 @@ while(not halted):
         pc+=int(x)
     
     
-""" else:
-    sys.stdout.write(memory)
+    else:
+        sys.stdout.write(memory)
 
 
-         """
+         
 

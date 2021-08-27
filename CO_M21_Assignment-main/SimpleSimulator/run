@@ -1,5 +1,5 @@
 #!/bin/bash
 
 # Add command to run your program here
-python3 main.py $@
+python3 main.py 
 echo "Hello World"
