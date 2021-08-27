@@ -1,7 +1,7 @@
 import sys
 instructions = []
 opcode_dic={'00000':'add','00001':'sub','00010':'mov','00011':'movr','00100':'ld','00101':'st','00110':'mul','00111':'div','01000':'rs','01001':'ls','01010':'xor','01011':'or','01100':'and','01101':'not','01110':'cmp','01111':'jmp','10000':'jlt','10001':'jgt',"10011":'hlt'}
-reg_dic={'R0':'000','R1':'001','R2':'010','R3':'011','R4':'100','R5':'101','R6':'110','FLAGS':'111'}
+reg_dic={'000':0,'001':0,'010':0,'011':0,'100':0,'101':0,'110':0,'111':0}
 global pc
 def decimalToBinary(n):
     return bin(n).replace("0b", "")
@@ -34,7 +34,7 @@ def executionEngine(code):
     val=0
     address=0
     imm=0
-    op=opcode_dic[code[0:5]]
+    op=opcode_dic[(code[0:5])]
     if op == "add":
         reg_1, reg_2, reg_3=code[7:10],code[10:13],code[13:16] 
         reg_dic[reg_1]=reg_dic[reg_2]+reg_dic[reg_3]
@@ -89,12 +89,15 @@ def executionEngine(code):
             reg_dic[reg_1]=temp
     
     elif op == "ld":
-        pass
-        #code[5:8],code[8:16]=
-    
+        
+        a,b=code[5:8],code[8:16]
+        x = decimalToBinary(b)
+        a = memory[x]
     elif op == "st":
-        pass
-        #code[5:8],code[8:16]=
+        
+        a,b=code[5:8],code[8:16]
+        x = decimalToBinary(b)
+        memory[x] = a
     
     elif op == "mul":
         reg_1,reg_2,reg_3=code[7:10],code[10:13],code[13:16]
@@ -141,7 +144,7 @@ def executionEngine(code):
         if reg_dic['111']=="0000000000000001":
             pc = int(address, base=2)
     if op == "hlt":
-        halted=1
+        halted=True
 loadData()
 defineMemory()
 while(not halted):
@@ -149,19 +152,22 @@ while(not halted):
         executionEngine(data)
         #complete the execution engine code
         sys.stdout.write(str(pc))
-        sys.stdout.write(str(reg_1))
-        sys.stdout.write(str(reg_2))
-        sys.stdout.write(str(reg_3))
-        sys.stdout.write(str(reg_4))
-        sys.stdout.write(str(reg_5))
-        sys.stdout.write(str(reg_6))
-        sys.stdout.write(str(reg_7))
+        sys.stdout.write(str(reg_dic['000']))
+        sys.stdout.write(str(reg_dic['001']))
+        sys.stdout.write(str(reg_dic['010']))
+        sys.stdout.write(str(reg_dic['011']))
+        sys.stdout.write(str(reg_dic['100']))
+        sys.stdout.write(str(reg_dic['101']))
+        sys.stdout.write(str(reg_dic['110']))
+        sys.stdout.write(str(reg_dic['111']))
         int(pc)
         x=decimalToBinary(1)
         pc+=int(x)
-    else:
-        sys.stdout.write(memory)
+    
+    
+""" else:
+    sys.stdout.write(memory)
 
 
-        
+         """
 
