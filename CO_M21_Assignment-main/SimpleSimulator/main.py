@@ -30,6 +30,7 @@ def defineMemory():
 pc = 00000000
 halted = False
 def executionEngine(code):
+    global halted
     global pc
     global reg_1,reg_2,reg_3,reg_4,reg_5,reg_6,reg_7
     reg_1,reg_2,reg_3,reg_4,reg_5,reg_6,reg_7=0,0,0,0,0,0,0
@@ -37,10 +38,11 @@ def executionEngine(code):
     address=0
     imm=0
     #code=str(code)
+    op="hlt"
     try:
         op=opcode_dic[code[0:5]]
     except:
-        op="hlt"
+        pass
     if op == "add":
         reg_1, reg_2, reg_3=code[7:10],code[10:13],code[13:16] 
         reg_dic[reg_1]=reg_dic[reg_2]+reg_dic[reg_3]
@@ -150,7 +152,8 @@ def executionEngine(code):
         if reg_dic['111']=="0000000000000001":
             pc = int(address, base=2)
     if op == "hlt":
-        halted=1
+        halted=True
+        return 
 loadData()
 defineMemory()
 def main():
@@ -158,23 +161,31 @@ def main():
     global halted
     loadData()
     defineMemory()
-    while not halted:     
+    count = 0
+    for i in memory:
+        count+=1
+        if i[0:5]=="10011":
+            break
+    print(count)
+
+    for i in range(count):     
         for data in  memory:
             executionEngine(data)
         #complete the execution engine code
-            sys.stdout.write(decimalToBinary(pc, 8) + " ")
-            sys.stdout.write(decimalToBinary(reg_dic['000'],16) + " ")
-            sys.stdout.write(decimalToBinary(reg_dic['001'],16) + " ")
-            sys.stdout.write(decimalToBinary(reg_dic['010'],16) + " ")
-            sys.stdout.write(decimalToBinary(reg_dic['011'],16) + " ")
-            sys.stdout.write(decimalToBinary(reg_dic['100'],16) + " ")
-            sys.stdout.write(decimalToBinary(reg_dic['101'],16) + " ")
-            sys.stdout.write(decimalToBinary(reg_dic['110'],16) + " ")
-            sys.stdout.write(decimalToBinary(reg_dic['111'],16) + " ")
-            sys.stdout.write("\n")
-            pc+=1
+        print(decimalToBinary(pc, 8) + " ")
+        print(decimalToBinary(reg_dic['000'],16) + " ")
+        print(decimalToBinary(reg_dic['001'],16) + " ")
+        print(decimalToBinary(reg_dic['010'],16) + " ")
+        print(decimalToBinary(reg_dic['011'],16) + " ")
+        print(decimalToBinary(reg_dic['100'],16) + " ")
+        print(decimalToBinary(reg_dic['101'],16) + " ")
+        print(decimalToBinary(reg_dic['110'],16) + " ")
+        print(decimalToBinary(reg_dic['111'],16) + " ")
+        print("\n")
+        pc+=1
+        count +=1
     for i in memory:
-        sys.stdout.write(i)
+         print(i)
 
 if __name__ == "__main__":
     main()
